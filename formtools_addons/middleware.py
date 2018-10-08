@@ -3,11 +3,12 @@ from __future__ import unicode_literals
 
 import json
 from django.http.request import QueryDict
+from django.utils.deprecation import MiddlewareMixin
 
 from .enums import HTTP_APPLICATION_JSON
 
 
-class JSONMiddleware(object):
+class JSONMiddleware(MiddlewareMixin):
     """
     Process application/json requests data from GET and POST requests.
     """
