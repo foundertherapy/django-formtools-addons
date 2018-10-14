@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 from django import forms
 from django.core.exceptions import ValidationError
-from django.core.urls import reverse
+from django.urls import reverse
 from django.forms import formsets
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
