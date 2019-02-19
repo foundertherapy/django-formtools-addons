@@ -204,7 +204,7 @@ class MultipleFormWizardView(BaseWizardView):
         done_response = self.done(form_list=form_list, form_dict=result_forms_dict, **kwargs)
         self.storage.reset()
         return done_response
-    
+
     def get_form_prefix(self, step=None, form=None):
         """
         Returns the prefix which will be used when calling the actual form for
@@ -238,6 +238,9 @@ class MultipleFormWizardView(BaseWizardView):
         # reset the current step to the first step.
         self.storage.current_step = self.steps.first
         return self.render(self.get_forms())
+
+    def is_done(self):
+        return self.steps.current == self.steps.last
 
     def post(self, *args, **kwargs):
         """
@@ -285,7 +288,7 @@ class MultipleFormWizardView(BaseWizardView):
             self.storage.set_step_files(self.steps.current, self.process_step_files(form))
 
             # check if the current step is the last step
-            if self.steps.current == self.steps.last:
+            if self.is_done():
                 # no more steps, render done view
                 return self.render_done(form, **kwargs)
             else:
